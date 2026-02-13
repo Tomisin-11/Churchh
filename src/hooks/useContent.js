@@ -14,7 +14,7 @@ async function safeFetch(url) {
 
 /**
  * Fetch a content section from the API.
- * Uses relative /api path — Vite proxy routes to Express on port 5000.
+ * Uses VITE_API_URL environment variable in production, falls back to relative path in dev.
  * Falls back gracefully to `fallback` if server is down or returns invalid data.
  */
 export function useContent(section, fallback) {
@@ -31,7 +31,10 @@ export function useContent(section, fallback) {
       setLoading(false);
     }
 
-    safeFetch(`/api/content/${section}`)
+    // Use environment variable for API URL, fall back to relative path
+    const BASE_URL = import.meta.env.VITE_API_URL || "/api";
+    
+    safeFetch(`${BASE_URL}/content/${section}`)
       .then((res) => {
         if (!res) return; // server down or empty — keep fallback/cache
         // Route returns { ...sectionData, data: sectionData, section }
