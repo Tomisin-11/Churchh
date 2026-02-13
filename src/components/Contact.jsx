@@ -65,7 +65,7 @@ function Contactmain() {
     <>
       {/* HERO */}
     <section
-        className="relative h-[150px] mt-25 bg-center bg-cover"
+        className="relative h-37.5 mt-25 mb-17.5 bg-center bg-cover"
         style={{ backgroundImage: "url('/Versebg.webp')" }}
       >
         <div className="absolute inset-0 bg-black/60" />

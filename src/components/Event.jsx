@@ -38,7 +38,7 @@ function Event2() {
         </div>
       </section>
 
-      <section className="py-20 text-center px-6">
+      <section className="py-20 text-center px-6 ">
         <p className="text-yellow-500 italic font-serif mb-2">{content?.sectionLabel || "Join Us"}</p>
         <h2 className="text-4xl md:text-5xl font-serif text-blue-900 mb-6">
           {content?.sectionHeading || "Upcoming Events"}
