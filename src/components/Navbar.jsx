@@ -92,7 +92,7 @@ export default function Navbar() {
       <div className="relative max-w-[1400px] mx-auto px-6 h-24 flex items-center justify-between">
         {/* LOGO */}
         <NavLink to="/">
-          <img src="/Logo.png" alt="Mafoluku Parish" className="h-14" />
+          <img src="/Logo.png" alt="Mafoluku Parish" className="h-25" />
         </NavLink>
 
         {/* DESKTOP NAV */}
