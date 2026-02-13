@@ -3,6 +3,7 @@ import { FaBookBible } from "react-icons/fa6";
 import { IoIosMan } from "react-icons/io";
 import { FiHeart } from "react-icons/fi";
 import { LuCross } from "react-icons/lu";
+import { apiFetch } from "../utils/api";
 
 const iconMap = {
   LuCross: <LuCross />,
@@ -16,10 +17,11 @@ function About() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/content/aboutPage")
-      .then((res) => res.text()).then((t) => { if (!t||!t.trim()) throw new Error("empty"); return JSON.parse(t); })
+    apiFetch("/content/aboutPage")
       .then((data) => {
-        setContent(data);
+        if (data) {
+          setContent(data);
+        }
         setLoading(false);
       })
       .catch((err) => {

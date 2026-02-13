@@ -1,13 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { apiFetch } from "../utils/api";
 
 function Event2() {
   const [content, setContent] = useState(null);
 
   useEffect(() => {
-    fetch("/api/content/eventsPage")
-      .then((res) => res.text()).then((t) => { if (!t||!t.trim()) throw new Error("empty"); return JSON.parse(t); })
-      .then((data) => setContent(data))
+    apiFetch("/content/eventsPage")
+      .then((data) => {
+        if (data) setContent(data);
+      })
       .catch((err) => console.error("Failed to load events:", err));
   }, []);
 

@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Layout from "./layout/Layout";
 import Event from "./pages/Events";
@@ -11,6 +12,13 @@ import Contactmain from "./components/Contact";
 import AdminApp from "./admin/AdminApp";
 
 function PublicSite() {
+  const location = useLocation();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <>
       <Navbar />

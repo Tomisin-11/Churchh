@@ -10,6 +10,7 @@ import {
   FaPen,
 } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
+import { apiFetch } from "../utils/api";
 
 function Contactmain() {
   const form = useRef(null);
@@ -19,9 +20,10 @@ function Contactmain() {
   const [content, setContent] = useState(null);
 
   useEffect(() => {
-    fetch("/api/content/contactPage")
-      .then((res) => res.text()).then((t) => { if (!t||!t.trim()) throw new Error("empty"); return JSON.parse(t); })
-      .then((data) => setContent(data))
+    apiFetch("/content/contactPage")
+      .then((data) => {
+        if (data) setContent(data);
+      })
       .catch((err) => console.error("Failed to load contact page content:", err));
   }, []);
 

@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { FaBookBible } from "react-icons/fa6";
+import { apiFetch } from "../utils/api";
 
 export default function Sermonmain() {
   const [content, setContent] = useState(null);
@@ -11,9 +12,10 @@ export default function Sermonmain() {
   const [times, setTimes] = useState({});
 
   useEffect(() => {
-    fetch("/api/content/sermonsPage")
-      .then((res) => res.text()).then((t) => { if (!t||!t.trim()) throw new Error("empty"); return JSON.parse(t); })
-      .then((data) => setContent(data))
+    apiFetch("/content/sermonsPage")
+      .then((data) => {
+        if (data) setContent(data);
+      })
       .catch((err) => console.error("Failed to load sermons:", err));
   }, []);
 
