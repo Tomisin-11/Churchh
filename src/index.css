@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
-/* Force dark background on body — prevents iOS Safari from showing white/pink body behind components */
+/* iOS Safari shows the html element background during overscroll/rubber-band.
+   Must set on BOTH html and body to prevent pink bleed-through on iPhone. */
+html,
 body {
   background-color: #090e1c;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
- 
- 
