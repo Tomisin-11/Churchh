@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "./api";
 import { useAuth } from "./context/AuthContext";
@@ -9,8 +9,17 @@ export default function AdminLogin() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPw, setShowPw] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 1024);
   const { signIn } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    setIsMobile(mq.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -30,7 +39,12 @@ export default function AdminLogin() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center relative overflow-hidden admin-login-bg"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      style={{
+        background: isMobile
+          ? "#090e1c"
+          : "linear-gradient(135deg, #0a0f1e 0%, #0d1b3e 50%, #0a0f1e 100%)",
+      }}
     >
       {/* Background cross watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
