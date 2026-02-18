@@ -190,7 +190,7 @@ export default function AdminLogin() {
 
           {/* Footer note */}
           <p className="text-center text-white/20 text-xs mt-8">
-            Default: admin@church.com · Admin@123
+             
           </p>
         </div>
       </div>
