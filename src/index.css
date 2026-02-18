@@ -1,14 +1,9 @@
 @import "tailwindcss";
 
-/* Admin Login — mobile uses the same flat bg as the desktop admin panel */
-.admin-login-bg {
-  background: #090e1c;
-}
-
-@media (max-width: 480px) {
-  .admin-login-bg {
-    background: linear-gradient(135deg, #0a0f1e 0%, #0d1b3e 50%, #0a0f1e 100%);
-  }
+/* Force dark background on body — prevents iOS Safari from showing white/pink body behind components */
+body {
+  background-color: #090e1c;
+  min-height: 100vh;
 }
 
  
