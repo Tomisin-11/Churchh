@@ -3,22 +3,30 @@ import { useNavigate } from "react-router-dom";
 import { login } from "./api";
 import { useAuth } from "./context/AuthContext";
 
+// Detect real mobile devices (iPhone, iPad, Android) AND small screens
+function checkIsMobile() {
+  const ua = navigator.userAgent || "";
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isAndroid = /Android/i.test(ua);
+  const isSmallScreen = window.innerWidth < 1024;
+  return isIOS || isAndroid || isSmallScreen;
+}
+
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPw, setShowPw] = useState(false);
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 1024);
+  const [isMobile, setIsMobile] = useState(checkIsMobile);
   const { signIn } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
-    setIsMobile(mq.matches);
-    const handler = (e) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const update = () => setIsMobile(checkIsMobile());
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
   async function handleSubmit(e) {
